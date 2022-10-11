@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seat Reservation</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <section id="seatFinder">
+      <div class="seat-availability card">
+        <h1>Seat availability</h1>
+        <button id="btnReserveRandomly">Reserve seats randomly</button>
+        <form>
+          <h3>Please enter a number for reserving the seats</h3>
+          <input id="inputNrOfReservedSeats" type="number" />
+          <br />
+          <button id="btnReservedByInput">Reserve seats based on input</button>
+          <h5 id="seatAvailabilityOutput">Output text seat availability</h5>
+        </form>
+      </div>
+      <div class="seat-reservation card">
+        <h1>Seat reservation</h1>
+        <form>
+          <h3>Please enter the number of seats you want</h3>
+          <input id="inputNrOfSeats" type="number" />
+          <br />
+          <button id="findSeatsButton" type="submit">Find the seat(s)</button>
+          <h5 id="output">Output text</h5>
+        </form>
+      </div>
+    </section>
+
+    <section id="theatre">
+      <header>
+        <div class="trapezoid"></div>
+        <h1>Stage</h1>
+      </header>
+      <div class="zones">
+        <div class="auditorium">
+          <h2>Auditorium</h2>
+          <div class="aud aud-a">
+            <div class="theatre-seats" id="aud-a-1">1</div>
+            <div class="theatre-seats" id="aud-a-2">2</div>
+            <div class="theatre-seats" id="aud-a-3">3</div>
+            <div class="theatre-seats" id="aud-a-4">4</div>
+            <div class="theatre-seats" id="aud-a-5">5</div>
+            <div class="theatre-seats" id="aud-a-6">6</div>
+          </div>
+          <div class="aud aud-b">
+            <div class="theatre-seats" id="aud-b-1">1</div>
+            <div class="theatre-seats" id="aud-b-2">2</div>
+            <div class="theatre-seats" id="aud-b-3">3</div>
+            <div class="theatre-seats" id="aud-b-4">4</div>
+            <div class="theatre-seats" id="aud-b-5">5</div>
+            <div class="theatre-seats" id="aud-b-6">6</div>
+            <div class="theatre-seats" id="aud-b-7">7</div>
+          </div>
+          <div class="aud aud-c">
+            <div class="theatre-seats" id="aud-c-1">1</div>
+            <div class="theatre-seats" id="aud-c-2">2</div>
+            <div class="theatre-seats" id="aud-c-3">3</div>
+            <div class="theatre-seats" id="aud-c-4">4</div>
+            <div class="theatre-seats" id="aud-c-5">5</div>
+            <div class="theatre-seats" id="aud-c-6">6</div>
+          </div>
+          <div class="aud aud-d">
+            <div class="theatre-seats" id="aud-d-1">1</div>
+            <div class="theatre-seats" id="aud-d-2">2</div>
+            <div class="theatre-seats" id="aud-d-3">3</div>
+            <div class="theatre-seats" id="aud-d-4">4</div>
+            <div class="theatre-seats" id="aud-d-5">5</div>
+          </div>
+          <div class="aud aud-e">
+            <div class="theatre-seats" id="aud-e-1">1</div>
+            <div class="theatre-seats" id="aud-e-2">2</div>
+            <div class="theatre-seats" id="aud-e-3">3</div>
+            <div class="theatre-seats" id="aud-e-4">4</div>
+          </div>
+        </div>
+        <div class="balcony">
+          <h2>Balcony</h2>
+          <div class="balc balc-a">
+            <div class="theatre-seats" id="bal-a-1">1</div>
+            <div class="theatre-seats" id="bal-a-2">2</div>
+            <div class="theatre-seats" id="bal-a-3">3</div>
+            <div class="theatre-seats" id="bal-a-4">4</div>
+            <div class="theatre-seats" id="bal-a-5">5</div>
+            <div class="theatre-seats" id="bal-a-6">6</div>
+            <div class="theatre-seats" id="bal-a-7">7</div>
+          </div>
+          <div class="balc balc-b">
+            <div class="theatre-seats" id="bal-b-1">1</div>
+            <div class="theatre-seats" id="bal-b-2">2</div>
+            <div class="theatre-seats" id="bal-b-3">3</div>
+            <div class="theatre-seats" id="bal-b-4">4</div>
+            <div class="theatre-seats" id="bal-b-5">5</div>
+            <div class="theatre-seats" id="bal-b-6">6</div>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <div class="tier">
+          <div class="tier-square sq1"></div>
+          <p>Tier 1</p>
+        </div>
+        <div class="tier">
+          <div class="tier-square sq2"></div>
+          <p>Tier 2</p>
+        </div>
+        <div class="tier">
+          <div class="tier-square sq3"></div>
+          <p>Tier 3</p>
+        </div>
+      </footer>
+    </section>
+    <script src="script.js" type="module"></script>
+  </body>
+</html>

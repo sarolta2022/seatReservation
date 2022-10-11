@@ -1,0 +1,167 @@
+* {
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.trapezoid {
+  border-top: 25vw solid goldenrod;
+  border-left: 12vw solid transparent;
+  border-right: 12vw solid transparent;
+  height: 0;
+  width: 60vw;
+  margin: 0 auto;
+}
+
+#seatFinder {
+  display: flex;
+  flex-direction: column;
+  gap: 5%;
+  justify-content: center;
+}
+
+.card {
+  margin: 3% auto;
+  padding: 3%;
+  text-align: center;
+  max-width: 80%;
+  border-radius: 5px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+button {
+  width: 200px;
+  min-height: 40px;
+  letter-spacing: 0.5px;
+  padding: 5%;
+  border: none;
+  border-radius: 3px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.2);
+}
+
+#btnReserveRandomly {
+  background-color: goldenrod;
+}
+#btnReservedByInput {
+  background-color: rgb(95, 95, 197);
+  color: white;
+}
+#findSeatsButton {
+  background-color: rgb(236, 72, 72);
+}
+input {
+  width: 70px;
+  height: 50px;
+  margin: 3% auto;
+  font-size: 2rem;
+  padding: 2%;
+}
+.zones,
+header {
+  text-align: center;
+}
+#theatre {
+  border-radius: 5px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  width: fit-content;
+  padding: 3%;
+  margin: 0 auto;
+}
+
+#seatFinder {
+  margin: 5% auto;
+}
+
+header {
+  position: relative;
+}
+
+header h1 {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+}
+
+.aud,
+.balc {
+  display: flex;
+  gap: 10px;
+  margin: 7px 0;
+  justify-content: center;
+}
+
+.aud div,
+.balc div {
+  background-color: blueviolet;
+  min-width: 50px;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  text-align: center;
+  color: white;
+  border: solid 2px black;
+}
+
+footer {
+  display: flex;
+  border: solid 2px black;
+  gap: 2%;
+  justify-content: center;
+  margin: 5% 15%;
+}
+
+.tier {
+  display: flex;
+}
+
+.tier p {
+  font-weight: bold;
+  padding: 1%;
+  width: 60px;
+  font-size: 1.2rem;
+}
+.tier-square {
+  min-width: 25px;
+  min-height: 25px;
+  background-color: blueviolet;
+  margin: auto;
+  border: solid 2px black;
+}
+
+footer .sq1 {
+  background-color: rgb(236, 72, 72);
+}
+
+footer .sq2 {
+  background-color: goldenrod;
+}
+
+footer .sq3 {
+  background-color: rgb(95, 95, 197);
+}
+
+@media screen and (min-width: 700px) {
+  body {
+    flex-direction: row;
+  }
+
+  .trapezoid {
+    border-top: 12vw solid goldenrod;
+    border-left: 6vw solid transparent;
+    border-right: 6vw solid transparent;
+    height: 0;
+    width: 30vw;
+    margin: 0 auto;
+  }
+}
