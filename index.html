@@ -12,21 +12,25 @@
       <div class="seat-availability card">
         <h1>Reserved seats</h1>
 
-        <form>
-          <button id="btnReserveRandomly">Reserve seats randomly</button>
+        <form type="submit">
+          <button type="submit" id="btnReserveRandomly">
+            Reserve seats randomly
+          </button>
           <h3>Please enter a number for reserving the seats</h3>
           <input id="inputNrOfReservedSeats" type="number" />
           <br />
-          <button id="btnReservedByInput">Reserve seats based on input</button>
+          <button type="submit" id="btnReservedByInput">
+            Reserve seats based on input
+          </button>
           <h4 id="reservedSeatsOutputHeader"></h4>
           <h5 id="reservedSeatsOutput"></h5>
         </form>
       </div>
       <div class="seat-reservation card">
         <h1>Seat reservation</h1>
-        <form>
+        <form type="submit">
           <h3>Please enter the number of seats you want</h3>
-          <input id="inputNrOfSeats" type="number" />
+          <input id="inputNrOfSeats" type="number" min="1" max="4" />
           <br />
           <button id="findSeatsButton" type="submit">Find the seat(s)</button>
           <h4 id="availableSeatHeader"></h4>
