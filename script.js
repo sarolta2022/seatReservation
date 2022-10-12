@@ -1,85 +1,88 @@
-import seats from "./data.js";
+"use strict";
+
+import theatreSeats from "./data.js";
 
 const input = document.getElementById("input");
 const output = document.getElementById("output");
 const btnReserveRandomly = document.getElementById("btnReserveRandomly");
+const btnReservedByInput = document.getElementById("btnReservedByInput");
+const inputNrOfReservedSeats = document.getElementById(
+  "inputNrOfReservedSeats"
+);
+const availableSeatHeader = document.getElementById("availableSeatHeader");
+
+const reservedSeatsOutputHeader = document.getElementById(
+  "reservedSeatsOutputHeader"
+);
+
 const order = [3, 4, 5, 2, 6, 1, 7];
 const abcOrder = ["a", "b", "c", "d", "e", "f", "g"];
-const theatreSeats = document.querySelectorAll("div.theatre-seats");
+const theatreSeatsBlabla = document.querySelectorAll("div.theatre-seats");
+
+const seats = [...theatreSeats];
+const numberOfSeats = seats.length;
+
 //coloring the seats
 
-const addFrontendId = () => {
-  seats.map((seat) => {
-    seat.frontendId = `${seat.zone.slice(0, 3)}-${seat.row}-${seat.seatNumber}`;
+const addFrontendId = (arr) => {
+  arr.map((item) => {
+    item.frontendId = `${item.zone.slice(0, 3)}-${item.row}-${item.seatNumber}`;
   });
 };
 
-addFrontendId();
+addFrontendId(seats);
 
-const colorseats = () => {
-  seats.map((seat) => {
-    if (seat.price === 1) {
-      document.getElementById(seat.frontendId).style.background =
+const colorSeats = (arr) => {
+  arr.map((item) => {
+    if (item.price === 1) {
+      document.getElementById(item.frontendId).style.background =
         "rgb(236, 72, 72)";
     }
-    if (seat.price === 2) {
-      document.getElementById(seat.frontendId).style.background = "goldenrod";
+    if (item.price === 2) {
+      document.getElementById(item.frontendId).style.background = "goldenrod";
     }
-    if (seat.price === 3) {
-      document.getElementById(seat.frontendId).style.background =
+    if (item.price === 3) {
+      document.getElementById(item.frontendId).style.background =
         "rgb(95, 95, 197)";
     }
   });
 };
 
-colorseats();
+colorSeats(seats);
 
 // calculate the random number of reserved seats
 
-const numberOfSeats = seats.length;
-
-const numberOfReservedSeats = Math.floor(
+let numberOfReservedSeats = Math.floor(
   Math.random() * (numberOfSeats - numberOfSeats * 0.2 + 1) +
     numberOfSeats * 0.2
 );
 
 // reserve seats randomly
-// create shallowArray, sort by shallowId, get the reserved seats and set availibility to false
 
-const shallowSeats = [...seats];
+let reservedSeats;
+let availableSeats;
 
-const randomReservedSeats = () => {
-  shallowSeats.map((shallowSeat) => {
-    shallowSeat.shallowId = Math.random();
+const reservingSeats = () => {
+  seats.map((seat) => {
+    seat.randomId = Math.random();
   });
 
-  shallowSeats.sort((seatA, seatB) => {
-    if (seatA.shallowId < seatB.shallowId) {
+  seats.sort((seatA, seatB) => {
+    if (seatA.randomId < seatB.randomId) {
       return -1;
     }
   });
   for (let i = 0; i < numberOfReservedSeats; i++) {
-    shallowSeats[i].isAvailable = false;
+    seats[i].isAvailable = false;
   }
-  return shallowSeats;
+  return seats;
 };
-randomReservedSeats();
-const availableSeats = shallowSeats.filter((item) => item.isAvailable);
-const updateUI = () => {
-  document.getElementById("seatAvailabilityOutput").innerText =
-    availableSeats.map(
-      (avSeat) => ` ${avSeat.zone} ${avSeat.row} ${avSeat.seatNumber} `
-    );
-  availableSeats.map((avSeat) => {
-    document.getElementById(avSeat.frontendId).style.opacity = 0.2;
-  });
-};
-
-updateUI();
 
 //sorting seats by rules
 
-const findSeats = (arr, prop1, prop2, prop3, prop4) => {
+const findSeats = () => {
+  availableSeats = seats.filter((item) => item.isAvailable);
+  console.log(availableSeats);
   availableSeats.sort((seatA, seatB) => {
     if (seatA.price === seatB.price) {
       if (seatA.zone === seatB.zone) return seatA.row < seatB.row ? -1 : 1;
@@ -92,4 +95,36 @@ const findSeats = (arr, prop1, prop2, prop3, prop4) => {
   return availableSeats;
 };
 
-console.log(findSeats());
+findSeats();
+
+const updateUI = () => {
+  reservedSeats = seats.filter((item) => !item.isAvailable);
+  availableSeats = seats.filter((item) => item.isAvailable);
+  reservedSeatsOutputHeader.innerText = "Reserved seats: ";
+  document.getElementById("reservedSeatsOutput").innerText = reservedSeats.map(
+    (resSeat) => ` ${resSeat.zone} ${resSeat.row} ${resSeat.seatNumber} `
+  );
+
+  availableSeatHeader.innerText = "Available seat(s): ";
+  document.getElementById("outputAvailableSeat").innerText = availableSeats.map(
+    (resSeat) => ` ${resSeat.zone} ${resSeat.row} ${resSeat.seatNumber} `
+  );
+  reservedSeats.map((resSeat) => {
+    document.getElementById(resSeat.frontendId).style.opacity = 0.2;
+  });
+};
+
+btnReserveRandomly.addEventListener("click", (e) => {
+  e.preventDefault();
+  reservingSeats();
+  updateUI();
+});
+
+btnReservedByInput.addEventListener("click", (e) => {
+  e.preventDefault();
+  numberOfReservedSeats = inputNrOfReservedSeats.value;
+  reservingSeats();
+  updateUI();
+});
+
+//console.log(findSeats());

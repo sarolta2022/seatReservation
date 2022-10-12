@@ -10,14 +10,16 @@
   <body>
     <section id="seatFinder">
       <div class="seat-availability card">
-        <h1>Seat availability</h1>
-        <button id="btnReserveRandomly">Reserve seats randomly</button>
+        <h1>Reserved seats</h1>
+
         <form>
+          <button id="btnReserveRandomly">Reserve seats randomly</button>
           <h3>Please enter a number for reserving the seats</h3>
           <input id="inputNrOfReservedSeats" type="number" />
           <br />
           <button id="btnReservedByInput">Reserve seats based on input</button>
-          <h5 id="seatAvailabilityOutput">Output text seat availability</h5>
+          <h4 id="reservedSeatsOutputHeader"></h4>
+          <h5 id="reservedSeatsOutput"></h5>
         </form>
       </div>
       <div class="seat-reservation card">
@@ -27,7 +29,8 @@
           <input id="inputNrOfSeats" type="number" />
           <br />
           <button id="findSeatsButton" type="submit">Find the seat(s)</button>
-          <h5 id="output">Output text</h5>
+          <h4 id="availableSeatHeader"></h4>
+          <h5 id="outputAvailableSeat"></h5>
         </form>
       </div>
     </section>

@@ -1,4 +1,4 @@
-const seats = [
+const theatreSeats = [
   {
     id: 1,
     zone: "auditorium",
@@ -329,4 +329,4 @@ const seats = [
   },
 ];
 
-export default seats;
+export default theatreSeats;
