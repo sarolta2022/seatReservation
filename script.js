@@ -14,14 +14,11 @@ const reservedSeatsOutputHeader = document.getElementById(
   "reservedSeatsOutputHeader"
 );
 
-const order = [3, 4, 5, 2, 6, 1, 7];
-const abcOrder = ["a", "b", "c", "d", "e", "f", "g"];
-
+//create shallowArray
 const seats = [...theatreSeats];
 const numberOfSeats = seats.length;
 
-//coloring the seats
-
+//add helper Id's
 const addFrontendId = (arr) => {
   arr.map((item) => {
     item.frontendId = `${item.zone.slice(0, 3)}-${item.row}-${item.seatNumber}`;
@@ -57,8 +54,7 @@ const addOrderId = (arr) => {
 addFrontendId(seats);
 addOrderId(seats);
 
-console.log(seats);
-
+//coloring the seats based on different price category
 const colorSeats = (arr) => {
   arr.map((item) => {
     if (item.price === 1) {
@@ -78,7 +74,6 @@ const colorSeats = (arr) => {
 colorSeats(seats);
 
 // calculate the random number of reserved seats
-
 let numberOfReservedSeats = Math.floor(
   Math.random() * (numberOfSeats - numberOfSeats * 0.2 + 1) +
     numberOfSeats * 0.2
@@ -102,17 +97,10 @@ const reservingSeats = () => {
   return seats;
 };
 
+//order seats based on rules
 const findSeats = () => {
   availableSeats = seats.filter((item) => item.isAvailable);
 
-  /* availableSeats.sort((seatA, seatB) => {
-    if (seatA.price === seatB.price) {
-      if (seatA.zone === seatB.zone) return seatA.row < seatB.row ? -1 : 1;
-      return seatA.zone < seatB.zone ? -1 : 1;
-    } else {
-      return seatA.price < seatB.price ? -1 : 1;
-    }
-  }); */
   availableSeats.sort((seatA, seatB) => {
     if (seatA.price === seatB.price) {
       if (seatA.zone === seatB.zone) {
@@ -131,16 +119,12 @@ const findSeats = () => {
   return availableSeats;
 };
 
-console.log(findSeats());
-
 const main = () => {
   reservingSeats();
   findSeats();
-  console.log(availableSeats);
 };
 
-//sorting seats by rules
-
+//updateUI
 const updateUI = () => {
   reservedSeats = seats.filter((item) => !item.isAvailable);
   availableSeats = seats.filter((item) => item.isAvailable);
@@ -158,42 +142,129 @@ const updateUI = () => {
   //return availableSeats;
   console.log(availableSeats);
 };
+
+//eventHandlers
 btnReserveRandomly.addEventListener("click", (e) => {
   e.preventDefault();
   main();
-  findSeats();
   updateUI();
 });
 
 btnReservedByInput.addEventListener("click", (e) => {
   e.preventDefault();
   numberOfReservedSeats = inputNrOfReservedSeats.value;
-  main();
-  findSeats();
-  updateUI();
+  if (numberOfReservedSeats < 8 || numberOfReservedSeats > 41) {
+    document.getElementById("reservedSeatsOutput").innerText =
+      "Please enter a number between 8 and 41!";
+  } else {
+    main();
+    updateUI();
+  }
 });
 
 btnFindSeat.addEventListener("click", (e) => {
   e.preventDefault();
   findSeats();
-  updateUI();
-
   console.log("red button clicked");
   console.log(availableSeats);
   const inputNrOfSeats = document.getElementById("inputNrOfSeats").value;
   console.log(inputNrOfSeats);
+
   if (inputNrOfSeats < 1 || inputNrOfSeats > 4) {
     availableSeatHeader.innerText = "Please reserve ticket(s) for 1-4 person!";
   }
-  if (inputNrOfSeats === 1) {
-    console.log(availableSeats[0]);
-    //return
-    availableSeatHeader.innerText = availableSeats[0];
+
+  if (inputNrOfSeats == 1) {
+    availableSeatHeader.innerText = `Your seat is in the zone of: ${availableSeats[0].zone}, in the row: ${availableSeats[0].row}, on the ${availableSeats[0].seatNumber}th seat`;
+
+    document.getElementById(availableSeats[0].frontendId).style.background =
+      "grey";
+    document.getElementById(availableSeats[0].frontendId).style.opacity = 1.5;
+    document.getElementById("outputAvailableSeat").innerText = "";
   }
-  if (inputNrOfSeats === 2 || inputNrOfSeats === 3 || inputNrOfSeats === 4) {
-    //find neighbour
-    console.log(availableSeats);
+
+  if (inputNrOfSeats == 2) {
+    const findNeighbours = (arr) => {
+      arr.map((item) => {
+        arr.filter((fItem) => {
+          item.row == fItem.row &&
+            item.zone == fItem.zone &&
+            item.seatNumber == fItem.seatNumber + 1;
+        });
+        console.log("I found something");
+      });
+    };
+
+    findNeighbours(availableSeats);
   }
 });
 
-//console.log(findSeats());
+const findNeighbours = (arr) => {
+  arr.map((item) => {
+    arr.filter((fItem) => {
+      item.row == fItem.row &&
+        (item.zone == fItem.zone) & (item.seatNumber == fItem.seatNumber + 1);
+    });
+    console.log("I found something");
+  });
+};
+
+/* const doIt = (arr) => {
+  const a = myArr;
+  const b = myArr;
+  for (let i = 0; i < b.length; i++) {
+    if (i == 0) {
+      var left_neighbour = "";
+    } else {
+      var left_neighbour = a[i - 1];
+    }
+    if (i == b.length) {
+      var right_neighbour = "";
+    } else {
+      var right_neighbour = a[i + 1];
+    }
+    if (left_neighbour !== "") {
+      if (right_neighbour) {
+        console.log(left_neighbour + "," + right_neighbour);
+      } else {
+        console.log(left_neighbour);
+      }
+    } else {
+      if (right_neighbour) {
+        console.log(right_neighbour);
+      } else {
+        console.log(left_neighbour);
+      }
+    }
+  }
+}; */
+
+const doIt = (arr) => {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length; j++) {
+      if (arr[i] == arr[i + j] + 1) {
+        console.log("neighb2");
+        console.log(arr[i], arr[i + j]);
+      }
+      for (let k = 0; k < arr.length; k++) {
+        if (arr[i] == arr[i + j] + 1 && arr[i] == arr[i + k] + 2) {
+          console.log("hey 3");
+          console.log(arr[i], arr[i + j], arr[i + k]);
+          for (let l = 0; l < arr.length; l++) {
+            if (
+              arr[i] == arr[i + j] + 1 &&
+              arr[i] == arr[i + k] + 2 &&
+              arr[i] == arr[i + l] + 3
+            ) {
+              console.log("hey 4");
+              console.log(arr[i], arr[i + j], arr[i + k], arr[i + l]);
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+const myArr = [5, 6, 4, 16, 3, 14, 20, 21, 17, 7, 9, 18, 15];
+console.log(doIt(myArr));
