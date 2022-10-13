@@ -165,6 +165,7 @@ btnReservedByInput.addEventListener("click", (e) => {
 btnFindSeat.addEventListener("click", (e) => {
   e.preventDefault();
   findSeats();
+
   console.log("red button clicked");
   console.log(availableSeats);
   const inputNrOfSeats = document.getElementById("inputNrOfSeats").value;
@@ -184,81 +185,145 @@ btnFindSeat.addEventListener("click", (e) => {
   }
 
   if (inputNrOfSeats == 2) {
-    const findNeighbours = (arr) => {
-      arr.map((item) => {
-        arr.filter((fItem) => {
-          item.row == fItem.row &&
-            item.zone == fItem.zone &&
-            item.seatNumber == fItem.seatNumber + 1;
-        });
-        console.log("I found something");
-      });
-    };
-
-    findNeighbours(availableSeats);
+    console.log("input 2 clicked");
+    for (let i = 0; i < availableSeats.length; i++) {
+      for (let j = 0; j < availableSeats.length; j++) {
+        if (
+          Math.abs(
+            availableSeats[i].seatNumber - availableSeats[i + j].seatNumber
+          ) == 1 &&
+          availableSeats[i].zone == availableSeats[i + j].zone &&
+          availableSeats[i].row == availableSeats[i + j].row
+        ) {
+          console.log(availableSeats[i].seatNumber);
+          console.log(availableSeats[i], availableSeats[i + j]);
+          availableSeatHeader.innerText = `Your seat(s) are in the zone of: ${
+            availableSeats[i].zone
+          }, in the row: ${availableSeats[i].row}, on the ${
+            availableSeats[i].seatNumber
+          }th and ${availableSeats[i + j].seatNumber}th seat`;
+          document.getElementById("outputAvailableSeat").innerText = "";
+        }
+      }
+    }
   }
+  if (inputNrOfSeats == 3) {
+    console.log("input 3 clicked");
+    for (let i = 0; i < availableSeats.length; i++) {
+      for (let j = 0; j < availableSeats.length; j++) {
+        for (let k = 0; k < availableSeats.length; k++) {
+          if (
+            Math.abs(
+              availableSeats[i].seatNumber - availableSeats[i + j].seatNumber
+            ) == 1 &&
+            Math.abs(
+              availableSeats[i].seatNumber - availableSeats[i + k].seatNumber
+            ) == 2 &&
+            Math.abs(
+              availableSeats[i + j].seatNumber -
+                availableSeats[i + k].seatNumber
+            ) == 1 &&
+            availableSeats[i].zone == availableSeats[i + j].zone &&
+            availableSeats[i].zone == availableSeats[i + k].zone &&
+            availableSeats[i].row == availableSeats[i + j].row &&
+            availableSeats[i].row == availableSeats[i + k].row
+          ) {
+            console.log(
+              availableSeats[i],
+              availableSeats[i + j],
+              availableSeats[i + k]
+            );
+            availableSeatHeader.innerText = `Your seat(s) are in the zone of: ${
+              availableSeats[i].zone
+            }, in the row: ${availableSeats[i].row}, on the ${
+              availableSeats[i].seatNumber
+            }th, ${availableSeats[i + j].seatNumber}th and the ${
+              availableSeats[i + k].seatNumber
+            } seat`;
+            document.getElementById("outputAvailableSeat").innerText = "";
+          }
+        }
+      }
+    }
+  }
+
+  if (inputNrOfSeats == 4) {
+    console.log("input 4 clicked");
+    for (let i = 0; i < availableSeats.length; i++) {
+      for (let j = 0; j < availableSeats.length; j++) {
+        for (let k = 0; k < availableSeats.length; k++) {
+          for (let l = 0; l < availableSeats.length; l++) {
+            if (
+              Math.abs(
+                availableSeats[i].seatNumber - availableSeats[i + j].seatNumber
+              ) == 1 &&
+              Math.abs(
+                availableSeats[i].seatNumber - availableSeats[i + k].seatNumber
+              ) == 2 &&
+              Math.abs(
+                availableSeats[i + j].seatNumber -
+                  availableSeats[i + k].seatNumber
+              ) == 1 &&
+              Math.abs(
+                availableSeats[i + j].seatNumber -
+                  availableSeats[i + l].seatNumber
+              ) == 3 &&
+              Math.abs(
+                availableSeats[i + k].seatNumber -
+                  availableSeats[i + l].seatNumber
+              ) == 1 &&
+              availableSeats[i].zone == availableSeats[i + j].zone &&
+              availableSeats[i].zone == availableSeats[i + k].zone &&
+              availableSeats[i].zone == availableSeats[i + l].zone &&
+              availableSeats[i].row == availableSeats[i + j].row &&
+              availableSeats[i].row == availableSeats[i + k].row &&
+              availableSeats[i].row == availableSeats[i + l].row
+            ) {
+              console.log(
+                availableSeats[i],
+                availableSeats[i + j],
+                availableSeats[i + k],
+                availableSeats[i + l]
+              );
+              availableSeatHeader.innerText = `Your seat(s) are in the zone of: ${
+                availableSeats[i].zone
+              }, in the row: ${availableSeats[i].row}, on the ${
+                availableSeats[i].seatNumber
+              }th, ${availableSeats[i + j].seatNumber}th, ${
+                availableSeats[i + k].seatNumber
+              } and the ${availableSeats[i + l].seatNumber} seat`;
+              document.getElementById("outputAvailableSeat").innerText = "";
+            }
+          }
+        }
+      }
+    }
+  } /*else {
+    availableSeatHeader.innerText = "Sorry";
+    document.getElementById("outputAvailableSeat").innerText = ""; 
+  } */
 });
 
 const findNeighbours = (arr) => {
-  arr.map((item) => {
-    arr.filter((fItem) => {
-      item.row == fItem.row &&
-        (item.zone == fItem.zone) & (item.seatNumber == fItem.seatNumber + 1);
-    });
-    console.log("I found something");
-  });
-};
-
-/* const doIt = (arr) => {
-  const a = myArr;
-  const b = myArr;
-  for (let i = 0; i < b.length; i++) {
-    if (i == 0) {
-      var left_neighbour = "";
-    } else {
-      var left_neighbour = a[i - 1];
-    }
-    if (i == b.length) {
-      var right_neighbour = "";
-    } else {
-      var right_neighbour = a[i + 1];
-    }
-    if (left_neighbour !== "") {
-      if (right_neighbour) {
-        console.log(left_neighbour + "," + right_neighbour);
-      } else {
-        console.log(left_neighbour);
-      }
-    } else {
-      if (right_neighbour) {
-        console.log(right_neighbour);
-      } else {
-        console.log(left_neighbour);
-      }
-    }
-  }
-}; */
-
-const doIt = (arr) => {
   for (let i = 0; i < arr.length; i++) {
     for (let j = 0; j < arr.length; j++) {
-      if (arr[i] == arr[i + j] + 1) {
-        console.log("neighb2");
+      if (Math.abs(arr[i] - arr[i + j]) == 1) {
         console.log(arr[i], arr[i + j]);
       }
       for (let k = 0; k < arr.length; k++) {
-        if (arr[i] == arr[i + j] + 1 && arr[i] == arr[i + k] + 2) {
-          console.log("hey 3");
+        if (
+          Math.abs(arr[i] - arr[i + j]) == 1 &&
+          Math.abs(arr[i] - arr[i + k]) == 2
+        ) {
           console.log(arr[i], arr[i + j], arr[i + k]);
-          for (let l = 0; l < arr.length; l++) {
-            if (
-              arr[i] == arr[i + j] + 1 &&
-              arr[i] == arr[i + k] + 2 &&
-              arr[i] == arr[i + l] + 3
-            ) {
-              console.log("hey 4");
-              console.log(arr[i], arr[i + j], arr[i + k], arr[i + l]);
-            }
+        }
+        for (let l = 0; l < arr.length; l++) {
+          if (
+            Math.abs(arr[i] - arr[i + j]) == 1 &&
+            Math.abs(arr[i] - arr[i + k]) == 2 &&
+            Math.abs(arr[i] - arr[i + l]) == 3
+          ) {
+            console.log(arr[i], arr[i + j], arr[i + k], arr[i + l]);
           }
         }
       }
@@ -266,5 +331,7 @@ const doIt = (arr) => {
   }
 };
 
-const myArr = [5, 6, 4, 16, 3, 14, 20, 21, 17, 7, 9, 18, 15];
-console.log(doIt(myArr));
+const myArr = [
+  5, 1023, 6, 189, 4, 1025, 16, 3, 188, 1022, 14, 20, 21, 17, 1026, 186, 7, 9,
+  18, 1024, 15, 187, 80, 190,
+];
