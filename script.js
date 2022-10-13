@@ -219,10 +219,10 @@ btnFindSeat.addEventListener("click", (e) => {
             Math.abs(
               availableSeats[i].seatNumber - availableSeats[i + k].seatNumber
             ) == 2 &&
-            Math.abs(
+            /* Math.abs(
               availableSeats[i + j].seatNumber -
                 availableSeats[i + k].seatNumber
-            ) == 1 &&
+            ) == 1 && */
             availableSeats[i].zone == availableSeats[i + j].zone &&
             availableSeats[i].zone == availableSeats[i + k].zone &&
             availableSeats[i].row == availableSeats[i + j].row &&
@@ -304,7 +304,76 @@ btnFindSeat.addEventListener("click", (e) => {
   } */
 });
 
-const findNeighbours = (arr) => {
+const findNeighbours = (arr, input) => {
+  let output;
+  if (input === 1) {
+    return arr[0];
+  }
+  if (input == 2) {
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = 0; j < arr.length; j++) {
+        if (Math.abs(arr[i] - arr[i + j]) == 1) {
+          output = [arr[i], arr[i + j]];
+        }
+      }
+    }
+    return output;
+  }
+
+  if (input == 3) {
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = 0; j < arr.length; j++) {
+        for (let k = 0; k < arr.length; k++) {
+          if (
+            Math.abs(arr[i] - arr[i + j]) == 1 &&
+            Math.abs(arr[i] - arr[i + k]) == 2 &&
+            Math.abs(arr[i + j] - arr[i + k] == 1)
+          ) {
+            output = [arr[i], arr[i + j], arr[i + k]];
+          }
+        }
+      }
+    }
+    return output;
+  }
+
+  if (input == 4) {
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = 0; j < arr.length; j++) {
+        for (let k = 0; k < arr.length; k++) {
+          for (let l = 0; l < arr.length; l++) {
+            if (
+              Math.abs(arr[i] - arr[i + j]) == 1 &&
+              Math.abs(arr[i] - arr[i + k]) == 2 &&
+              Math.abs(arr[i] - arr[i + l]) == 3 &&
+              Math.abs(arr[i + j] - arr[i + k] == 1) &&
+              Math.abs(arr[i + k] - arr[i + l] == 1)
+            ) {
+              output = [arr[i], arr[i + j], arr[i + k], arr[i + l]];
+            }
+          }
+        }
+      }
+    }
+    return output;
+  }
+
+  if ((output = " ")) {
+    console.log("sorry");
+  }
+};
+
+const myArr = [
+  5, 4, 1025, 16, 3, 188, 1027, 1022, 14, 20, 21, 17, 1026, 1022, 1023, 6, 189,
+  186, 7, 9, 18, 1024, 15, 187, 80, 190,
+];
+
+console.log(findNeighbours(myArr, 1));
+console.log(findNeighbours(myArr, 2));
+console.log(findNeighbours(myArr, 3));
+console.log(findNeighbours(myArr, 4));
+console.log(findNeighbours(myArr, 5));
+/* const findNeighbours = (arr) => {
   for (let i = 0; i < arr.length; i++) {
     for (let j = 0; j < arr.length; j++) {
       if (Math.abs(arr[i] - arr[i + j]) == 1) {
@@ -329,9 +398,4 @@ const findNeighbours = (arr) => {
       }
     }
   }
-};
-
-const myArr = [
-  5, 1023, 6, 189, 4, 1025, 16, 3, 188, 1022, 14, 20, 21, 17, 1026, 186, 7, 9,
-  18, 1024, 15, 187, 80, 190,
-];
+}; */
